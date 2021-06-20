@@ -1,3 +1,8 @@
+#
+# Automaticly color your valorant chat text input
+# I recommend to bind this script to a button on your mouse or keyboard using a simple macro application.
+#
+
 # Red: <enemy>Text</>
 # Blue: <team>Text</>
 # Yellow: <system>Text</>
