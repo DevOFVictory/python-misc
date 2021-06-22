@@ -9,9 +9,11 @@
 # Green: <notification>Text</>
 # Pink: <warning>Text</>
 
+from time import time
 from pynput.keyboard import Key, Controller
 import pyperclip
 import random
+import time
 keyboard = Controller()
 
 keyboard.press(Key.ctrl)
@@ -25,17 +27,33 @@ keyboard.release('x')
 keyboard.release(Key.ctrl)
 
 latest = ''
-colors = ['<enemys>', '<team>', '<system>', '<notification>', '<warning>']
+colors = ['<enemy>', '<system>', '<notification>', '<team>', '<warning>']
 output = ''
+
+
+mode = 'rainbow'
+
 s = pyperclip.paste()
 
+if mode == 'random':
+    for i in s:
+        if i != ' ':
+            rand = random.choice(colors)
+            while rand == latest:
+                rand = random.choice(colors)    
+            latest = rand
+            output += rand + i + '</>'
+        else:
+            output += ' '
 
-for i in s:
-    rand = random.choice(colors)
-    while rand == latest:
-        rand = random.choice(colors)
-    latest = rand
-    output += rand + i + '</>'
+elif mode == 'rainbow':
+    counter = 0
+    for i in s:
+        if i != ' ':
+            output += colors[counter % len(colors)] + i + '</>'
+            counter += 1
+        else:
+            output += ' '
 
 
 pyperclip.copy(output)
